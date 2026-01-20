@@ -15,7 +15,7 @@ This project demonstrates a reusable virtual home network designed to simulate a
 ## 🏗️ Network Architecture
 The network was simulated using GNS3 integrated with VMware Workstation Pro.
 
-**(Insert GNS3 Topology Screenshot here - from report Page 11)**
+![Network topology view](screenshots/25.11.08_network.topology.png)
 
 ### VLAN Configuration
 I implemented network segmentation to isolate management traffic from endpoint traffic.
@@ -42,7 +42,7 @@ nmap -A 192.168.30.2
 
 Suricata detected the anomalous traffic via the SPAN port on the switch. The logs were forwarded to the Wazuh Manager, triggering the alert: "ET SCAN Possible Nmap User-Agent Observed".
 
-**(Insert Wazuh Dashboard Screenshot here - from report Page 21)**
+![Suricata alerts on nmap appearing in Wazuh](screenshots/25.11.09_nmap.wazuh.png)
 
 ---
 
