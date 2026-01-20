@@ -40,7 +40,7 @@ nmap -A 192.168.30.2
 ```
 ### 2. The Detection
 
-Suricata detected the anomalous traffic via the SPAN port on the switch. The logs were forwarded to the Wazuh Manager, triggering the alert: "ET SCAN Possible Nmap User-Agent Observed".
+Suricata detected the anomalous traffic via the SPAN port on the switch. The logs were forwarded to the Wazuh Manager, triggering the alert: **"ET SCAN Possible Nmap User-Agent Observed"**.
 
 ![Suricata alerts on nmap appearing in Wazuh](screenshots/25.11.09_nmap.wazuh.png)
 
