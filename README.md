@@ -26,7 +26,7 @@ I implemented network segmentation to isolate management traffic from endpoint t
 | **20** | Kali | `192.168.20.0/24` | Attacker Machine (Dept A) |
 | **30** | Windows | `192.168.30.0/24` | Victim Machine (Dept B) |
 
-*Full Cisco Router and Switch configurations are available in the `/configs` folder.*
+*Full Cisco Router and Switch configurations are available in the [/configs](configs) folder.*
 
 ---
 
