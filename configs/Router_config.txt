@@ -1,5 +1,9 @@
-- Router subinterface setup:
+! ---------------------------------------------------------
+! Device: Core Router (GNS3)
+! Role: Inter-VLAN Routing & Internet Gateway
+! ---------------------------------------------------------
 
+! --- Subinterface setup ---
 enable
 configure terminal
 interface Ethernet0/0
@@ -24,8 +28,7 @@ exit
 end
 write memory
 
-- Router firewall interface setup:
-
+! --- Firewall interface setup ---
 configure terminal
 interface Ethernet0/1
 description Firewall-Link
@@ -38,8 +41,7 @@ ip route 0.0.0.0 0.0.0.0 10.0.0.2
 end
 write memory
 
-- Router DHCP setup:
-
+! --- DHCP setup ---
 ip dhcp excluded-address 192.168.20.1
 ip dhcp pool KALI
 network 192.168.20.0 255.255.255.0
@@ -57,7 +59,7 @@ exit
 end
 write memory
 
-- Sending router logs to Wazuh:
+! --- Sending logs to Wazuh ---
 
 configure terminal
 logging host 192.168.10.10
@@ -65,7 +67,7 @@ logging host 192.168.10.10
 end
 wr
 
-- Setting up router ACLs:
+! --- Setting up ACLs ---
 
 ip access-list extended SECURE-VLANS
 permit tcp any host 192.168.10.10 eq 1514
@@ -81,4 +83,3 @@ exit
 
 end
 wr
-
