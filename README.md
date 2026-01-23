@@ -81,10 +81,8 @@ sudo chown suricata:suricata /var/run/suricata
 
 ## 📂 Configuration Files
 
-These contain the commands that I used to set up each of the devices.
+[Router_config.cfg](configs/Router_config.cfg) - ACLs, Subinterfaces, and DHCP.
 
-[Router_config.txt](configs/Router_config.txt) - ACLs, Subinterfaces, and DHCP.
-
-[Switch_config.txt](configs/Switch_config.txt) - VLANs, Trunking, and SPAN port.
+[Switch_config.cfg](configs/Switch_config.cfg) - VLANs, Trunking, and SPAN port.
 
 ossec.conf - Wazuh Agent configuration snippet.
