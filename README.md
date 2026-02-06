@@ -26,7 +26,7 @@ I implemented network segmentation to isolate management traffic from endpoint t
 | **20** | Kali | `192.168.20.0/24` | Attacker Machine (Dept A) |
 | **30** | Windows | `192.168.30.0/24` | Victim Machine (Dept B) |
 
-*Full Cisco Router and Switch configurations are available in the [/configs](configs) folder.*
+*Cleaned Cisco Router and Switch configurations are available in the [/configs](configs) folder.*
 
 ---
 
@@ -43,6 +43,11 @@ nmap -A 192.168.30.2
 Suricata detected the anomalous traffic via the SPAN port on the switch. The logs were forwarded to the Wazuh Manager, triggering the alert: **"ET SCAN Possible Nmap User-Agent Observed"**.
 
 ![Suricata alerts on nmap appearing in Wazuh](screenshots/25.11.09_nmap.wazuh.png)
+
+---
+
+## 🖧 Network Configuration Highlights
+
 
 ---
 
@@ -85,4 +90,4 @@ sudo chown suricata:suricata /var/run/suricata
 
 [Switch_config.cfg](configs/Switch_config.cfg) - VLANs, Trunking, and SPAN port.
 
-ossec.conf - Wazuh Agent configuration snippet.
+[ossec.conf](configs/ossec.conf) - Wazuh Agent configuration snippets.
