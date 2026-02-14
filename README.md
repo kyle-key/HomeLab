@@ -12,6 +12,17 @@ This project demonstrates a reusable virtual home network designed to simulate a
 
 ---
 
+## 🛠️ Technologies & Tools
+* **Hypervisor & Emulation:** VMware Workstation Pro, GNS3
+* **Network Infrastructure:**
+  * Cisco ASAv Firewall (`asav992-32.qcow2`)
+  * Cisco vIOS L2 Switch (`viosl2-adventerprisek9`)
+  * Cisco IOU L3 Router (`i86bi-linux-l3-jk9s-15.0.1.bin`)
+* **Security & Monitoring:** Wazuh (SIEM/XDR) on Amazon Linux 2023, Suricata (IDS) on Ubuntu Server
+* **Endpoints:** Kali Linux (Attacker), Windows 10 (Victim)
+
+---
+
 ## 🏗️ Network Architecture
 The network was simulated using GNS3 integrated with VMware Workstation Pro.
 
@@ -92,7 +103,7 @@ This project required significant troubleshooting. Here are the main technical h
 
 **Issue**: Suricata logs were not appearing in the Wazuh dashboard despite being forwarded. The logs showed `wazuh-analysisd ERROR Too many fields for JSON decoder`. 
 
-**Solution**: The default decoder limit in Wazuh is 256 fields, but Suricata's `eve.json` is verbose. I modified the `internal_options.conf` file to increase the limit:
+**Solution**: The default decoder limit in Wazuh is 256 fields, but Suricata's `eve.json` is verbose. I modified the `internal_options.conf` file to increase the limit.
 ```bash
 # /var/ossec/etc/internal_options.conf
 analysisd.decoder_order_size=1024  # Changed from 256
@@ -125,3 +136,8 @@ sudo chown suricata:suricata /var/run/suricata
 [Switch_config.cfg](configs/Switch_config.cfg) - VLANs, Trunking, and SPAN port.
 
 [ossec.conf](configs/ossec.conf) - Wazuh Agent configuration snippets.
+
+---
+
+## ⚠️ Disclaimer
+This repository and the associated lab environment are for educational purposes only. All attacks and simulations were conducted in an isolated, authorized, and virtualized environment to demonstrate defensive capabilities and network monitoring concepts.
