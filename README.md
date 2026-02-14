@@ -48,6 +48,40 @@ Suricata detected the anomalous traffic via the SPAN port on the switch. The log
 
 ## 🖧 Network Configuration Highlights
 
+### 1. Inter-VLAN Routing (Router-on-a-Stick) 
+I configured subinterfaces on the Core Router to allow traffic routing between the Management, Kali, and Windows VLANs while maintaining segmentation.
+```Cisco CLI
+! Router-on-a-Stick Configuration for VLAN 10 (Management)
+interface Ethernet0/0.10
+ description Gateway for Management VLAN
+ encapsulation dot1q 10
+ ip address 192.168.10.1 255.255.255.0
+```
+### 2. Traffic Analysis (SPAN Port)
+To enable the Suricata IDS to inspect network traffic, I configured a Switched Port Analyzer (SPAN) session on the core switch. This mirrored all traffic from the router uplink to the monitoring interface.
+```Cisco CLI
+! Mirror traffic from the Router (Gi0/0) to Suricata (Gi2/2)
+monitor session 1 source interface Gi0/0
+monitor session 1 destination interface Gi2/2
+```
+### 3. Network Segmentation (ACLs)
+I implemented Extended ACLs to enforce strict segmentation. The following configuration blocks the Windows 10 VLAN from accessing the Management subnet, while permitting specific ports (1514/1515) required for Wazuh agent communication.
+```Cisco CLI
+ip access-list extended SECURE-VLANS
+ ! Permit Wazuh Agent Traffic (TCP/UDP)
+ permit udp any host 192.168.10.10 eq 1514
+ permit tcp any host 192.168.10.10 eq 1515
+ ! Deny all other Windows VLAN traffic to Management VLAN
+ deny ip 192.168.30.0 0.0.0.255 192.168.10.0 0.0.0.255
+ permit ip any any
+```
+### 4. Centralized Logging (Syslog)
+I configured the Core Router to forward all system logs and security events to the Wazuh SIEM for centralized monitoring and alerting.
+```Cisco CLI
+! Configure Router to send logs to Wazuh Server
+logging host 192.168.10.10
+logging trap informational
+```
 
 ---
 
